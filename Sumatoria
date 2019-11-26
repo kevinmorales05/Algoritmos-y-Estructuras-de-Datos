@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+//recursividad la funcion se llama a si misma
+//este programa permite sumar numeros menores al establecido al llamar la función
+}
+int sumatoria(int n);
+
+int main()
+{
+	cout << sumatoria(5);
+
+
+
+	return 0;
+}
+
+int sumatoria(int n)
+{
+
+	//caso base
+	if (n == 0) //1. determinar caso base
+	{
+		return 0; //tiene que ser 1 porque al final se multiplicara por el retorno del caso n=0
+	}
+	else
+	{
+		return n + sumatoria(n - 1);
+	}
