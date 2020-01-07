@@ -1,0 +1,7 @@
+| 4 |
+| 5 |
+| 6 |
+| 4 |
+Elemento encontrado
+En la posicion 1Elemento encontrado
+En la posicion 4
