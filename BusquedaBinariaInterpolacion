@@ -1,0 +1,57 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int a[7]={1,2,3,4,5,6,7}; //con un arreglo supuestamente ordenado, sino ordenar primero
+    int primero=0, ultimo=6, medio, cont=0, num=3;
+/*
+    for(int i=0; i<7; i++){
+
+        cout<<"Ingrese el elemento "<<i+1<<" : ";
+        cin>>a[i];
+        cout<<endl;
+
+    }
+*/
+
+    cout<<"Ingrese el elemeno que desee encontrar: ";
+    cin>>num;
+
+    while(a[primero] != num && cont <=7)
+    {
+
+    medio= primero +((num -a[primero])*(ultimo-primero))/(a[ultimo]-a[primero]) ; //calcular elemento medio
+
+        if(a[medio]<num)
+        {
+        medio++;
+        //primero=medio+1;
+        }
+        else if (a[medio]>num)
+        {
+       //ultimo=medio-1;
+       medio--;
+
+        }
+        else {
+            primero=medio;
+        }
+        cont++;
+
+    }
+
+    if(a[primero]==num)
+    {
+      cout<< "Elemento encontrado";
+    }
+    else {
+        cout<< "Elemento no encontrado" <<endl;
+    }
+
+
+
+
+    return 0;
+}
