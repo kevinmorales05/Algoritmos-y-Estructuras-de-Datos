@@ -1,0 +1,107 @@
+#include<iostream>
+#include<fstream>
+#define tamanio(a) (sizeof(a)/sizeof(a[0]));//se usa esto para tener el tamanio del arreglo
+#include<fstream>
+using namespace std;
+//reducir ambito de busqueda a la mitad, busca el elemento medio, trabaja con una mitad ,
+//luego con la otra mitad y asi sucesivamente.
+//divide y venceras
+// 1. tener el arreglo ordenado
+//2. obtener la mitad del arreglo (posicion inicial + posicion final)/2
+//3. decidir si de trabnaja con lado izquierdo o derecho, y finalizar si lo encuentro en el medio
+//Algoritmo de Busqueda Binaria
+
+
+//voy a agregar un algoritmo de ordenamiento
+const int t=10;
+void ordenar(int a[], int t);
+int main(){
+
+int b,j,i,k;
+int a[]={5,8,9,1,2,16,4};// 10 ES LA Cantidad de elementos
+ordenar(a,7);
+i=0;//posicion inicial
+/*
+j=9-1;//posicion final
+*/
+j=tamanio(a)-1;
+b=8;//elemento buscado inicializado
+
+ cout<<"Que numero desea encontrar?"<<endl;
+ cin>>b;
+
+
+do
+{
+    k=(i+j)/2;//posicion mitad
+    if (a[k]<= b)
+        i=k+1;//derecha
+    if (a[k]>=b)
+        j=k-1;//izquierda
+}
+while(i<=j);//mientras la posicion inicial sea menor que la posicion final
+    if (a[k]==b)//si posicion inicial es igual a la posicion buscada
+    {
+        ofstream archivo;
+        archivo.open("datos.txt");
+        archivo<<"Elemento Encontrado"<<endl<<" esta en la posicion "<<k;
+
+
+
+        archivo.close();
+        cout<<"Elemento Encontrado"<<endl;
+        cout<<"Elemento Encontrado"<<" esta en la posicion "<<k<<endl;
+    }
+
+    else//si posicion inicial NO es igual a la posicion buscada
+    {
+        ofstream archivo;
+        archivo.open("datos.txt");
+        archivo<<"Elemento NO Encontrado"<<endl;
+        archivo.close();
+        cout<<"Elemento NO Encontrado"<<endl;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+return 0;
+}
+
+
+
+void ordenar(int a[], int t)
+{
+
+int aux, min;
+for (int i=0; i<t; i++)
+    {
+    min=i;
+    for (int j=i+1;j<t;j++)
+        {
+        if (a[j]<a[min])
+            {
+            min=j;
+            }
+        }
+         aux=a[i];
+         a[i]=a[min];
+         a[min]=aux;
+        }
+
+
+    for(int i=0; i<t;i++)
+    {
+         cout<<a[i]<<" ";
+    }
+    cout<<endl;
+
+}
