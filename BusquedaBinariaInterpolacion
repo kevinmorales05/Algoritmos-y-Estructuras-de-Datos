@@ -1,21 +1,37 @@
 #include <iostream>
 
 using namespace std;
+int a[7];
+void ingresar(int n, int a[7]);
+void encontrar(int n,int a[]);
 
 int main()
 {
-    int a[7]={1,2,3,4,5,6,7}; //con un arreglo supuestamente ordenado, sino ordenar primero
-    int primero=0, ultimo=6, medio, cont=0, num=3;
-/*
+    int a[7]; //con un arreglo supuestamente ordenado, sino ordenar primero
+    long int primero=0, ultimo=6, medio, cont=0;
+
+ingresar(7,a);
+encontrar(7,a);
+
+
+
+    return 0;
+}
+
+void ingresar(int n, int a[]){
     for(int i=0; i<7; i++){
 
         cout<<"Ingrese el elemento "<<i+1<<" : ";
         cin>>a[i];
         cout<<endl;
 
-    }
-*/
 
+    }
+}
+
+void encontrar(int n,int a[]){
+long int  num;
+long int primero=0, ultimo=6, medio, cont=0;
     cout<<"Ingrese el elemeno que desee encontrar: ";
     cin>>num;
 
@@ -44,7 +60,8 @@ int main()
 
     if(a[primero]==num)
     {
-      cout<< "Elemento encontrado";
+      cout<< "Elemento encontrado"<<endl;
+      cout<< "El numero encontrado es: " << num <<endl;
     }
     else {
         cout<< "Elemento no encontrado" <<endl;
@@ -52,6 +69,4 @@ int main()
 
 
 
-
-    return 0;
 }
