@@ -1,0 +1,26 @@
+void ordenamientoInsercion(tLista& lista, tEmpleado empleados)
+{
+bool correcto = true;
+if (lista.contador == 0)
+{
+correcto = false;
+cout << "No se pudo ordenar: No hay elementos" << endl;
+}
+else
+{
+for (int i = 1; i < lista.contador; i++)
+{
+int pos = i;
+while ((pos > 0) && (lista.elementos[pos - 1] > lista.elementos[pos]))
+{
+tEmpleado tmp;
+tmp = lista.elementos[pos];
+lista.elementos[pos] = lista.elementos[pos - 1];
+lista.elementos[pos - 1] = tmp;
+pos--;
+}
+}
+cout << "Se ha ordenado correctactemente" << endl;
+}
+}
+
