@@ -1,0 +1,31 @@
+void ordenamientoSeleccion(tLista& lista, tEmpleado empleados)
+{
+bool correcto = true;
+if (lista.contador == 0)
+{
+correcto = false;
+cout << "No se pudo ordenar: No hay elementos" << endl;
+}
+else
+{
+for (int i = 0; i < lista.contador - 1; i++)
+{
+int menor = i;
+for (int j = i + 1; j < lista.contador; j++)
+{
+if (lista.elementos[j] < lista.elementos[menor])
+{
+menor = j;
+}
+}
+if (menor > i)
+{
+tEmpleado tmp;
+tmp = lista.elementos[i];
+lista.elementos[i] = lista.elementos[menor];
+lista.elementos[menor] = tmp;
+}
+}
+cout << "Se ha ordenado correctactemente" << endl;
+}
+}
