@@ -1,0 +1,68 @@
+#include <iostream>
+
+using namespace std;
+
+void dividir(int a[], int inicial, int final);
+void fusionar(int a[], int pInicial, int pFinal, int medio);
+
+int main()
+{
+    int a[7] = {38, 27, 43, 3, 9, 82, 11};
+    dividir(a, 0, 6);
+    for(int i = 0; i < 7; i++)
+    {
+        cout << "|" << a[i] << "|" << " ";
+    }
+    return 0;
+}
+
+void dividir(int a[], int inicial, int final)
+{
+    int mitad;
+    if (inicial < final)
+    {
+        mitad = (inicial + final) / 2;
+        dividir(a, inicial, mitad);          // Llama a si misma
+        dividir(a, mitad+1, final);
+        fusionar(a, inicial, final, mitad);
+    }
+}
+
+void fusionar(int a[], int pInicial, int pFinal, int medio)
+{
+    int i, j, k, temp[pFinal - pInicial+1];
+    i = pInicial;
+    k = 0;
+    j = medio + 1;
+    while (i <= medio && j <= pFinal)
+    {
+        if (a[i] < a[j])
+        {
+            temp[k] = a[i];
+            k++;
+            i++;
+        }
+        else
+        {
+            temp[k] = a[j];
+            k++;
+            j++;
+        }
+    }
+    while (i <= medio)
+    {
+        temp[k] = a[i];
+            k++;
+            i++;
+    }
+    while (j <= pFinal)
+    {
+        temp[k] = a[j];
+            k++;
+            j++;
+    }
+    for (int i = pInicial; i <= pFinal; i++)
+    {
+        a[i] = temp[i - pInicial];
+    }
+}
