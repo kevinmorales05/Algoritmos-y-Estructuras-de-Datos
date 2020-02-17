@@ -1,63 +1,175 @@
 #include <iostream>
 using namespace std;
 
+//arboles
+
+
+//plantilla del nodo
+struct Nodo
+{
+  int dato;
+  Nodo *derecho; //puntero derecho
+  Nodo *izquierdo; //puntero izquierdo
+};
+
+//nodos listos para ser insertados en el arbol binario
+Nodo *crearNodoPadresHijos(int n); // el * quiere decir que esta funcion va a ir cambiando
+
+//arbol binario listo para ser usado
+Nodo *arbolBinario = NULL;//plantilla para insertar mi arbole, este es el rompecabezas
+//esta funcion sirve para insertar nodos en arbol binario
+void insertarNodosEnArbolBinario(Nodo *&arbolBinario, int n); //n es la cantidad de bombillos a insertar en arbol
+
+void mostrarArbolBinario(Nodo *&arbolBinario, int separador);
+
+void preOrden(Nodo *&arbolBinario);
+void inOrden(Nodo *&arbolBinario);
+void posOrden(Nodo *&arbolBinario);
+void ingresarArbol();
 void menu();
 
-int main() {
-  menu();
-}
-
-void menu() 
+int main()
 {
-  int op=0;
-  do
+
+menu();
+
+
+  return 0;
+}
+
+Nodo *crearNodoPadresHijos(int n)
+{
+ //iniciaclizar el arbol con los nodos
+Nodo *nuevo= new Nodo(); //iniciaclizar un nodo Nodo(), con esto construyo base el primero llamado al constructor
+
+//Asignar los valores al nodo creado (instanciado)
+nuevo -> dato = n;
+nuevo -> derecho = NULL; //inicialmente apunta a NULL
+nuevo -> izquierdo = NULL;//direccion de izquierda nula
+
+return nuevo; //retorno mi nueva plantilla
+}
+
+
+void insertarNodosEnArbolBinario(Nodo *&arbolBinario, int n)
+{
+    
+  if (arbolBinario == NULL)
   {
-  cout<< "1. Ingresar datos de arbol"<<endl;
-  cout<< "2. Mostrar arbol"<<endl;
-  cout<< "3. Realizar Recorrido PreOrden"<<endl;
-  cout<< "4. Realizar Recorrido InOrden"<<endl;
-  cout<< "5. Realizar Recorrido PosOrden"<<endl;
-  cout<< "0. Salir"<<endl;
-  cin>>op;
+      Nodo *nuevo= crearNodoPadresHijos(n);
+      arbolBinario = nuevo;
+  }
+  
 
- switch (op)
-      {
-          case 1:
-          ingresarArbolBinario(arbolBinario, n);
-          insertarNodosEnArbolBinario(arbolBinario, n);
-          break;
-          case 2:
-          mostrarArbolBinario(arbolBinario, n);
 
-          break;
-          case 3:
-          cout<< "Recorrido PREORDEN"<<endl; 
-              preOrden(arbolBinario);
-          break;
-          case 4:
-          cout<< "Recorrido INORDEN"<<endl; 
-              inOrden(arbolBinario);
-          break;
-          case 5:
-          cout<< "Recorrido postORDEN"<<endl;
-              posOrden(arbolBinario);
-          break;
-          case 0:
-              return;
-          break;
-          
-          
-      }
 
-  } while (op > 0 &&  op<6);
+else
+  {
+
+    //insertar nodo raiz
+      int datoRaiz = arbolBinario -> dato;
+
+      if (n < datoRaiz)
+        {
+          //insertar el siguiente nodo en el sub-izquierdo
+          insertarNodosEnArbolBinario(arbolBinario -> izquierdo, n);
+        }
+
+        else
+        {
+          //insertar el siguiente nodo en el sub-derecho
+          insertarNodosEnArbolBinario(arbolBinario -> derecho, n);
+        }
+  }
 
 }
 
-void ingresarArbolBinario(Nodo *&arbolBinario, int n){
-int cantNodos;
-cout<< "Cuantos nodos desea tener: ";
-cin>> cantNodos;
+void mostrarArbolBinario(Nodo *&arbolBinario, int separador)
+{
 
+    if(arbolBinario == NULL)
+    {
+      return; //no pase nada, sale de la funcion
+    }
+    else
+    {
+            mostrarArbolBinario(arbolBinario-> derecho, separador+1);
+        for (int i=0; i< separador; i++)
+            {
+                cout<< " ";
+            }
+                cout << arbolBinario -> dato << endl;//va a mostrar el dato almacenado
+                mostrarArbolBinario(arbolBinario-> izquierdo, separador+1);
+    }
+
+
+
+}
+//raiz-izq-der
+void preOrden(Nodo *&arbolBinario) {
+
+  if (arbolBinario == NULL){ //para ver si existe el arbol
+
+    return;
+  }
+  else {
+    //raiz
+    cout<< arbolBinario -> dato << "-";
+    //izquierda
+    preOrden(arbolBinario -> izquierdo);
+    //derecha
+    preOrden(arbolBinario -> derecho);
+  }
+
+
+
+
+
+}
+// I-R-D
+void inOrden(Nodo *&arbolBinario){
+
+if (arbolBinario == NULL){ //para ver si existe el arbol
+
+    return;
+  }
+  else {
+
+    //izquierda
+    preOrden(arbolBinario -> izquierdo);
+     //raiz
+    cout<< arbolBinario -> dato << "-";
+    //derecha
+    preOrden(arbolBinario -> derecho);
+  }
+
+
+
+}
+
+//I-D-R
+void posOrden(Nodo *&arbolBinario){
+   //izquierda
+    preOrden(arbolBinario -> izquierdo);
+       //derecha
+    preOrden(arbolBinario -> derecho);
+     //raiz
+    cout<< arbolBinario -> dato << "-";
+
+
+}
+
+void ingresarArbol(){
+
+int cantNodos;
+cout<< "Cuantos nodos se requieren: ";
+cin>>cantNodos;
+        if(cantNodos == 0)
+            {
+                menu();
+            }
+
+int n;
  for(int i=0; i< cantNodos; i++)
  {
    cout << "Insertar nodos ";
@@ -65,7 +177,51 @@ cin>> cantNodos;
    insertarNodosEnArbolBinario(arbolBinario, n);
 
  }
+ mostrarArbolBinario(arbolBinario, n);
 
+}
+
+void menu(){
+
+int op=0;
+  do
+  {
+  cout<< "1. Ingresar datos de arbol"<<endl;
+  cout<< "2. Realizar Recorrido PreOrden"<<endl;
+  cout<< "3. Realizar Recorrido InOrden"<<endl;
+  cout<< "4. Realizar Recorrido PosOrden"<<endl;
+  cout<< "0. Salir"<<endl;
+  cin>>op;
+
+ switch (op)
+      {
+          case 1:
+                ingresarArbol();
+          break;
+          case 2:
+          cout<< "Recorrido PREORDEN"<<endl;
+              preOrden(arbolBinario);
+              cout<<endl;
+          break;
+          case 3:
+          cout<< "Recorrido INORDEN"<<endl;
+              inOrden(arbolBinario);
+              cout<<endl;
+          break;
+          case 4:
+          cout<< "Recorrido postORDEN"<<endl;
+              posOrden(arbolBinario);
+              cout<<endl;
+          break;
+          case 0:
+              return;
+          break;
+
+
+      }
+
+  } while (op > 0 &&  op<5);
 
 
 }
+
