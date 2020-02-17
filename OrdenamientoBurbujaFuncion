@@ -1,0 +1,34 @@
+void ordenamientoBurbuja(tLista& lista, tEmpleado empleados)
+{
+bool correcto = true;
+if (lista.contador == 0)
+{
+correcto = false;
+cout << "No se pudo ordenar: No hay elementos" << endl;
+}
+else
+{
+bool inter = true;
+int i = 0;
+while ((i < lista.contador - 1) && inter)
+{
+inter = false;
+for (int j = lista.contador - 1; j > i; j--)
+{
+if (lista.elementos[j] < lista.elementos[j - 1])
+{
+tEmpleado tmp;
+tmp = lista.elementos[j];
+lista.elementos[j] = lista.elementos[j - 1];
+lista.elementos[j - 1] = tmp;
+inter = true;
+}
+}
+if (inter)
+{
+i++;
+}
+}
+cout << "Se ha ordenado correctactemente" << endl;
+}
+}
