@@ -1,0 +1,71 @@
+#include <iostream>
+using namespace std;
+
+void menu();
+
+int main() {
+  menu();
+}
+
+void menu() 
+{
+  int op=0;
+  do
+  {
+  cout<< "1. Ingresar datos de arbol"<<endl;
+  cout<< "2. Mostrar arbol"<<endl;
+  cout<< "3. Realizar Recorrido PreOrden"<<endl;
+  cout<< "4. Realizar Recorrido InOrden"<<endl;
+  cout<< "5. Realizar Recorrido PosOrden"<<endl;
+  cout<< "0. Salir"<<endl;
+  cin>>op;
+
+ switch (op)
+      {
+          case 1:
+          ingresarArbolBinario(arbolBinario, n);
+          insertarNodosEnArbolBinario(arbolBinario, n);
+          break;
+          case 2:
+          mostrarArbolBinario(arbolBinario, n);
+
+          break;
+          case 3:
+          cout<< "Recorrido PREORDEN"<<endl; 
+              preOrden(arbolBinario);
+          break;
+          case 4:
+          cout<< "Recorrido INORDEN"<<endl; 
+              inOrden(arbolBinario);
+          break;
+          case 5:
+          cout<< "Recorrido postORDEN"<<endl;
+              posOrden(arbolBinario);
+          break;
+          case 0:
+              return;
+          break;
+          
+          
+      }
+
+  } while (op > 0 &&  op<6);
+
+}
+
+void ingresarArbolBinario(Nodo *&arbolBinario, int n){
+int cantNodos;
+cout<< "Cuantos nodos desea tener: ";
+cin>> cantNodos;
+
+ for(int i=0; i< cantNodos; i++)
+ {
+   cout << "Insertar nodos ";
+   cin>>n;
+   insertarNodosEnArbolBinario(arbolBinario, n);
+
+ }
+
+
+
+}
